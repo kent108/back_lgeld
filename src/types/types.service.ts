@@ -1,26 +1,43 @@
 import { Injectable } from '@nestjs/common';
 import { CreateTypeDto } from './dto/create-type.dto';
 import { UpdateTypeDto } from './dto/update-type.dto';
+import { Type } from './entities/type.entity';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class TypesService {
-  create(createTypeDto: CreateTypeDto) {
-    return 'This action adds a new type';
+
+  constructor(
+    @InjectRepository(Type)
+    private typeRepository: Repository<Type>,
+  ) { }
+  
+  async create(createTypeDto: CreateTypeDto) {
+    const newtype = this.typeRepository.create(createTypeDto); // Création d'un nouveau type
+    await this.typeRepository.save(newtype); // Sauvegarde du type dans la BDD
+    return newtype;  // On renvoie le type créé
   }
 
-  findAll() {
-    return `This action returns all types`;
+ async  findAll() {
+   const allTypes = await this.typeRepository.find(); // Récupération de tous les types
+    return allTypes; // On renvoie les types trouvés
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} type`;
+  async findOne(id: number) {
+    const oneType = await this.typeRepository.findOneBy({ id: id }); // Récupération d'un type grâce à son ID
+    return oneType; // On renvoie le type trouvé
   }
 
-  update(id: number, updateTypeDto: UpdateTypeDto) {
-    return `This action updates a #${id} type`;
+  async update(id: number, updateTypeDto: UpdateTypeDto) {
+    const typeToUpdate = await this.findOne(id); // On récupère le type à modifier 
+    const updatedType = Object.assign(typeToUpdate, updateTypeDto); // On fusionne les données
+    await this.typeRepository.save(updatedType); // On sauvegarde les données mises à jour
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} type`;
+  async remove(id: number) {
+    const typeToRemove = await this.findOne(id); // On récupère le type à supprimer
+    return this.typeRepository.remove(typeToRemove); // On supprime le type
+
   }
 }
