@@ -22,4 +22,5 @@ export class User {
 
   @Column({ type: 'char', length: 10 })
   phone: string;
+
 }
