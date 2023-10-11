@@ -15,6 +15,7 @@ import { TypesModule } from './types/types.module';
 import { Type } from './types/entities/type.entity';
 import { PicturesModule } from './pictures/pictures.module';
 import { Picture } from './pictures/entities/picture.entity';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { Picture } from './pictures/entities/picture.entity';
     ArticlesModule,
     TypesModule,
     PicturesModule,
+    AuthModule,
 
   ],
   controllers: [AppController],
