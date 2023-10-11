@@ -19,7 +19,7 @@ export class TypesService {
     return newtype;  // On renvoie le type créé
   }
 
- async  findAll() {
+ async findAll() {
    const allTypes = await this.typeRepository.find(); // Récupération de tous les types
     return allTypes; // On renvoie les types trouvés
   }
