@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Article } from "src/articles/entities/article.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({ name: 'type' })
 export class Type {
@@ -7,4 +8,8 @@ export class Type {
     
     @Column({ type: 'varchar', length: 255 })
     description: string;
+
+    @OneToMany(() => Article, (article) => article.id, { eager: true })
+    article: Article[];
+    
 }

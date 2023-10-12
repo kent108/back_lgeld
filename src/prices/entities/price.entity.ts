@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Article } from 'src/articles/entities/article.entity';
+import { Format } from 'src/formats/entities/format.entity';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'price' })
 export class Price {
@@ -13,4 +15,15 @@ export class Price {
 
   @Column({ type: 'varchar', length: 255 })
   price: string;
+
+
+  // Relations entre les tables articles et formats
+
+  @ManyToOne(() => Article, (article) => article.id)
+  @JoinColumn({ name: 'article_id' })
+  article: Article;
+
+  @ManyToOne(() => Format, (format) => format.id)
+  @JoinColumn({ name: 'format_id' })
+  format: Format;
 }
