@@ -13,7 +13,7 @@ export class Price {
   @Column({ type: 'int' })
   format_id: number;
 
-  @Column({ type: 'varchar', length: 255 })
+  @Column({ type: 'int'})
   price: number;
 
 
