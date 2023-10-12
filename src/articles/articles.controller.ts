@@ -16,7 +16,7 @@ import { AuthGuard } from '@nestjs/passport';
 
 @ApiTags('articles')
 @Controller('articles')
-@UseGuards(AuthGuard('jwt'))
+// @UseGuards(AuthGuard('jwt'))
 export class ArticlesController {
   constructor(private readonly articlesService: ArticlesService) {}
 
@@ -34,6 +34,7 @@ export class ArticlesController {
   findOne(@Param('id') id: string) {
     return this.articlesService.findOne(+id);
   }
+  
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateArticleDto: UpdateArticleDto) {

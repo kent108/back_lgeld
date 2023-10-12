@@ -14,7 +14,7 @@ export class Price {
   format_id: number;
 
   @Column({ type: 'varchar', length: 255 })
-  price: string;
+  price: number;
 
 
   // Relations entre les tables articles et formats

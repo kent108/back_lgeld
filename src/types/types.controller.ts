@@ -2,8 +2,12 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { TypesService } from './types.service';
 import { CreateTypeDto } from './dto/create-type.dto';
 import { UpdateTypeDto } from './dto/update-type.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+
+@ApiTags('types')
 @Controller('types')
+// @UseGuards(AuthGuard('jwt'))
 export class TypesController {
   constructor(private readonly typesService: TypesService) {}
 

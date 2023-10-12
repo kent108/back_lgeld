@@ -10,6 +10,8 @@ export class Format {
     @Column({ type: 'varchar', length: 255 })
     size: string;
 
+    // Relations entre les tables
+
     @ManyToMany(() => Article, (article) => article.id)
     articles: Article[];
 }

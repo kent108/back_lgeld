@@ -16,7 +16,7 @@ import { AuthGuard } from '@nestjs/passport';
 
 @ApiTags('prices')
 @Controller('prices')
-@UseGuards(AuthGuard('jwt'))
+// @UseGuards(AuthGuard('jwt'))
 export class PricesController {
   constructor(private readonly pricesService: PricesService) {}
 
@@ -30,9 +30,17 @@ export class PricesController {
     return this.pricesService.findAll();
   }
 
-  @Get(':id')
+  @Get()
   findOne(@Param('id') id: string) {
     return this.pricesService.findOne(+id);
+  }
+
+  @Get('article')
+  findPrice(
+    @Body('article_id') article_id: number,
+    @Body('format_id') format_id: number,
+  ) {
+    return this.pricesService.findPrice(article_id, format_id);
   }
 
   @Patch(':id')
