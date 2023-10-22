@@ -19,11 +19,12 @@ export class Price {
 
   // Relations entre les tables articles et formats
 
-  @ManyToOne(() => Article, (article) => article.id)
-  @JoinColumn({ name: 'article_id' })
-  article: Article;
+  @ManyToOne(() => Article, (article) => article.id) // Plusieurs prix pour un article
+  @JoinColumn({ name: 'article_id' }) // Clé étrangère
+  article: Article; // Nom de la relation
 
-  @ManyToOne(() => Format, (format) => format.id)
-  @JoinColumn({ name: 'format_id' })
-  format: Format;
+  @ManyToOne(() => Format, (format) => format.id) // Plusieurs prix pour un format
+  @JoinColumn({ name: 'format_id' }) // Clé étrangère
+  format: Format; // Nom de la relation
 }
+

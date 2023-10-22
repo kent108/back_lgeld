@@ -34,6 +34,11 @@ export class ArticlesController {
   findOne(@Param('id') id: string) {
     return this.articlesService.findOne(+id);
   }
+
+  @Get('types/:description')
+    findByDescription(@Param('description') description: string) {
+      return this.articlesService.getArticlesByTypes(description);
+    }
   
 
   @Patch(':id')

@@ -39,7 +39,7 @@ export class Article {
             referencedColumnName: 'id'
         }
     })
-    Formats: Format[];
+    formats: Format[];
 
     
 

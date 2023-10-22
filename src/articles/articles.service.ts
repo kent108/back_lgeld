@@ -4,19 +4,20 @@ import { UpdateArticleDto } from './dto/update-article.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Article } from './entities/article.entity';
 import { Repository } from 'typeorm';
+import { Type } from 'src/types/entities/type.entity';
 
 @Injectable()
 export class ArticlesService {
-
   constructor(
     @InjectRepository(Article)
     private readonly articleRepository: Repository<Article>,
-) {}
+  
+  ) {}
 
   async create(createArticleDto: CreateArticleDto) {
     const newArticle = this.articleRepository.create(createArticleDto); // Création d'un nouveau article
     await this.articleRepository.save(newArticle); // Sauvegarde du article dans la BDD
-    return newArticle;  // On renvoie le article créé
+    return newArticle; // On renvoie le article créé
   }
 
   async findAll() {
@@ -27,6 +28,15 @@ export class ArticlesService {
   async findOne(id: number) {
     const oneArticle = await this.articleRepository.findOneBy({ id: id }); // Récupération d'un article grâce à son ID
     return oneArticle; // On renvoie le article trouvé
+  }
+
+  async getArticlesByTypes(description: string): Promise<Article[]> { // On récupère les articles par type
+    const articlesByTypes = await this.articleRepository
+      .createQueryBuilder('article')
+      .leftJoinAndSelect('article.type', 'type')
+      .where('type.description = :description', { description: description })
+      .getMany();
+    return articlesByTypes;
   }
 
   async update(id: number, updateArticleDto: UpdateArticleDto) {

@@ -30,8 +30,10 @@ export class PricesService {
 
   async findPrice(article_id: number, format_id: number): Promise<Price> {
     const price = await this.priceRepository.findOne({
-      where: { article_id, format_id },
+      where: { article_id: article_id, format_id: format_id },
+      
     });  
+    
     return price;
   }
 

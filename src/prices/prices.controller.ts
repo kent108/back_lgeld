@@ -13,6 +13,7 @@ import { CreatePriceDto } from './dto/create-price.dto';
 import { UpdatePriceDto } from './dto/update-price.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
+import { log } from 'console';
 
 @ApiTags('prices')
 @Controller('prices')
@@ -35,7 +36,7 @@ export class PricesController {
     return this.pricesService.findOne(+id);
   }
 
-  @Get('article')
+  @Post('article')
   findPrice(
     @Body('article_id') article_id: number,
     @Body('format_id') format_id: number,
