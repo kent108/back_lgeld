@@ -16,6 +16,7 @@ import { Type } from './types/entities/type.entity';
 import { PicturesModule } from './pictures/pictures.module';
 import { Picture } from './pictures/entities/picture.entity';
 import { AuthModule } from './auth/auth.module';
+import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
   imports: [
@@ -37,7 +38,6 @@ import { AuthModule } from './auth/auth.module';
     TypesModule,
     PicturesModule,
     AuthModule,
-
   ],
   controllers: [AppController],
   providers: [AppService],
