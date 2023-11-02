@@ -42,15 +42,15 @@ export class PicturesService {
   // }
 
   async getImage(id: number, res): Promise<StreamableFile> {
-    const result = await this.pictureRepository.find();
-    const lastResult = result[result.length - 1];
+    const result = await this.pictureRepository.findOneBy({ id });
+   
 
     const pictureFile = createReadStream(
-      join(process.cwd(), 'uploads', lastResult.name),
+      join(process.cwd(), 'uploads', result.name),
     );
     console.log(process.cwd());
 
-    res.set('Content-Type', lastResult.mimetype);
+    res.set('Content-Type', result.mimetype);
 
     return new StreamableFile(pictureFile);
   }
