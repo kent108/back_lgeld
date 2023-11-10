@@ -27,20 +27,22 @@ export class Article {
 
     // Relations entre les tables
 
-    @ManyToMany(() => Format, (format) => format.id, { eager: true })
-    @JoinTable({
-        name: 'price',
-        joinColumn: {
-            name: 'article_id',
-            referencedColumnName: 'id'
-        },
-        inverseJoinColumn: {
-            name: 'format_id',
-            referencedColumnName: 'id'
-        }
-    })
-    formats: Format[];
+    // @ManyToMany(() => Format, (format) => format.id, { eager: true })
+    // @JoinTable({
+    //     name: 'price',
+    //     joinColumn: {
+    //         name: 'article_id',
+    //         referencedColumnName: 'id'
+    //     },
+    //     inverseJoinColumn: {
+    //         name: 'format_id',
+    //         referencedColumnName: 'id'
+    //     }
+    // })
+    // formats: Format[];
 
+    @OneToMany(() => Price, (price) => price.article, { eager: true, cascade: true })
+    prices: Price[];
     
 
     @OneToOne(() => Picture, (picture) => picture.id, { eager: true })
